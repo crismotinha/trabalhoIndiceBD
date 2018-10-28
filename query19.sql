@@ -1,5 +1,5 @@
 select sum(l_extendedprice* (1 - l_discount)) as revenue 
-from LINEITEM, PART FORCE INDEX (p_brand_idx)
+from LINEITEM, PART
 where 	(p_partkey = l_partkey 
 			and p_brand = 'Brand#52' 
             and p_container in ('SM CASE', 'SM BOX', 'SM PACK', 'SM PKG') 
@@ -33,6 +33,6 @@ where 	(p_partkey = l_partkey
 -- forçando índex em P_SIZE, faz index range scan, o tempo de execução é 0,994 sec.
 -- forçando índex em P_CONTAINER, faz index range scan, e o tempo de execução é 1,003 sec.
 -- forçando índex em P_BRAND, faz index range scan, e o tempo de execução é 0,755 sec.
-
-CREATE INDEX p_brand_idx ON PART(P_BRAND);
+-- como é force index, não adianta para o propósito do trabalho
+-- CREATE INDEX p_brand_idx ON PART(P_BRAND);
 
